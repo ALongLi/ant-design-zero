@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "serve": "vite preview",
     "prepare": "husky install",
     "format": "prettier --write src",
-    "lint": "tsc --noEmit && eslint src --cache --ext .ts,.tsx",
-    "lint:fix": "tsc --noEmit && eslint src --fix --cache --ext .ts,.tsx",
-    "clean": "rimraf dist node_modules yarn.lock package.lock.json .eslintcache"
+    "lint": "tsc --noEmit && eslint --ext .ts,.tsx ./src",
+    "lint:fix": "tsc --noEmit && eslint --fix --cache --ext .ts,.tsx ./src",
+    "clean": "rimraf dist node_modules yarn.lock package.lock.json .eslintcache",
+    "clean:cache": "rimraf node_modules/.cache/ node_modules/.vite .eslintcache"
   },
   "lint-staged": {
     "*.{ts,tsx}": "yarn lint",
@@ -19,12 +20,16 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-form": "^1.50.1",
+    "@ant-design/pro-layout": "^6.31.7",
     "antd": "^4.17.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.1.1"
   },
   "devDependencies": {
+    "@types/node": "^17.0.0",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
@@ -33,6 +38,7 @@
     "eslint": "^8.4.1",
     "husky": "^7.0.4",
     "less": "^4.1.2",
+    "less-loader": "^10.2.0",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",

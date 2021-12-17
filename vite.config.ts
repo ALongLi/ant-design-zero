@@ -1,3 +1,4 @@
+import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import vitePluginImp from 'vite-plugin-imp'
@@ -22,5 +23,12 @@ export default defineConfig({
         javascriptEnabled: true,
       },
     },
+  },
+  resolve: {
+    alias: [
+      // fix less import by: @import ~
+      { find: /^~/, replacement: '' },
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+    ],
   },
 })

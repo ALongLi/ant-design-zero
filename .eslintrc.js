@@ -9,7 +9,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   rules: {
-    'no-console': 2,
+    'no-console': 1,
     'no-empty': 2,
   },
 }
