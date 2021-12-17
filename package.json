@@ -8,13 +8,13 @@
     "preview": "vite preview",
     "prepare": "husky install",
     "format": "prettier --write src",
-    "lint": "tsc --noEmit && eslint src --ext .ts,.tsx",
-    "lint:fix": "tsc --noEmit && eslint src --fix --ext .ts,.tsx",
-    "clean": "rimraf node_modules yarn.lock package.lock.json .eslintcache"
+    "lint": "tsc --noEmit && eslint src --cache --ext .ts,.tsx",
+    "lint:fix": "tsc --noEmit && eslint src --fix --cache --ext .ts,.tsx",
+    "clean": "rimraf dist node_modules yarn.lock package.lock.json .eslintcache"
   },
   "lint-staged": {
-    "**/*.{ts,tsx}": "yarn lint",
-    "**/*.{tsx,ts,less,md,json}": [
+    "*.{ts,tsx}": "yarn lint",
+    "**/*.{tsx,ts,less,json}": [
       "prettier --write"
     ]
   },
