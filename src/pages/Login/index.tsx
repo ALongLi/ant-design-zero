@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { Space } from 'antd'
 import { ProFormText, LoginForm } from '@ant-design/pro-form'
 import { LockOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons'
+import Footer from '@/components/Footer'
+import './index.less'
 
 const iconStyles = {
   marginLeft: '16px',
@@ -23,8 +25,9 @@ const mockWait = (time = 100) => {
 export default () => {
   const navigate = useNavigate()
   return (
-    <>
+    <div className="p-login">
       <LoginForm
+        className="jc-center"
         title="Ant Design Zero"
         subTitle="A starting point for new web applications."
         actions={
@@ -73,6 +76,7 @@ export default () => {
           ]}
         />
       </LoginForm>
-    </>
+      <Footer />
+    </div>
   )
 }
