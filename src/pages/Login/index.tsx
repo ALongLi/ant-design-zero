@@ -33,6 +33,11 @@ export default () => {
             <WechatOutlined style={iconStyles} />
           </Space>
         }
+        request={async (params) => {
+          console.log(params)
+          await mockWait(1000)
+          return {}
+        }}
         onFinish={async (values) => {
           await mockWait(1000)
           console.log(values)

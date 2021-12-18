@@ -6,7 +6,11 @@ interface FallbackLoadingProps {
 }
 
 const FallbackLoading: FC<FallbackLoadingProps> = ({ tip }) => {
-  return <Spin tip={tip}></Spin>
+  return (
+    <div className="h-full d-flex jc-center ai-center">
+      <Spin size="large" tip={tip}></Spin>
+    </div>
+  )
 }
 
 export default FallbackLoading

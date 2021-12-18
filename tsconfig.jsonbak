@@ -19,8 +19,9 @@
     "baseUrl": ".",
     "paths": {
       "$/*": ["./*"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "*": ["types/*.d.ts"]
     }
   },
-  "include": ["src", "types", "build", "mock", "vite.config.ts"]
+  "include": ["./src", "types/**/*.ts"]
 }

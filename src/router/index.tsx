@@ -1,13 +1,12 @@
 import React, { FC, lazy } from 'react'
 import { RouteObject } from 'react-router'
 import { BrowserRouter, Navigate, useRoutes } from 'react-router-dom'
-import Layout from '@/components/Layout'
+import RouteItem from '@/components/RouteItem'
 
-import RouteItem from './RouteItem'
-
+const Layout = lazy(() => import('@/components/Layout'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
-const Home = lazy(() => import('@/pages/Home'))
 const Login = lazy(() => import('@/pages/Login'))
+const Home = lazy(() => import('@/pages/Home'))
 
 const routes: RouteObject[] = [
   {

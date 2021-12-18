@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_DROP_CONSOLE: string
+  readonly VITE_PORT: number
   // 更多环境变量...
 }
 

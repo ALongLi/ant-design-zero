@@ -5,8 +5,9 @@ import vitePluginImp from 'vite-plugin-imp'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, __dirname)
+  const env = loadEnv(mode, __dirname) as ImportMetaEnv
   return {
+    base: env.BASE_URL,
     plugins: [
       react(),
       vitePluginImp({
@@ -31,6 +32,7 @@ export default defineConfig(({ mode }) => {
       alias: [
         // fix less import by: @import ~
         { find: /^~/, replacement: '' },
+        { find: '$/', replacement: resolve(__dirname, '.') + '/' },
         { find: '@/', replacement: resolve(__dirname, 'src') + '/' },
       ],
     },
