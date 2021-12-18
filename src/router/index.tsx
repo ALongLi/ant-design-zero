@@ -1,42 +1,47 @@
-import { lazy, FC } from 'react'
+import React, { FC, lazy } from 'react'
 import { RouteObject } from 'react-router'
-import { BrowserRouter, Routes, Route, useRoutes, Navigate } from 'react-router-dom'
+import { BrowserRouter, Navigate, useRoutes } from 'react-router-dom'
 import Layout from '@/components/Layout'
 
-import Home from '../pages/Home'
-import Login from '../pages/Login'
-// const Home = lazy(() => import('../pages/Home'))
-// const Login = lazy(() => import('../pages/Login'))
+import RouteItem from './RouteItem'
 
-// const routes: RouteObject[] = [
-//   {
-//     path: '/',
-//     element: <Layout />,
-//     children: [
-//       { path: '/', element: <Index /> },
-//       { path: '/about', element: <About /> },
-//     ],
-//   },
-//   // { path: '/about', element: About }
-// ]
+const NotFound = lazy(() => import('@/pages/NotFound'))
+const Home = lazy(() => import('@/pages/Home'))
+const Login = lazy(() => import('@/pages/Login'))
 
-// const RouteElements = () => useRoutes(routes)
+const routes: RouteObject[] = [
+  {
+    path: '/',
+    element: <RouteItem title="" element={<Layout />} />,
+    children: [
+      {
+        path: '',
+        element: <RouteItem title="" element={<Navigate to="/login" />} />,
+      },
+      {
+        path: '/home',
+        element: <RouteItem title="首页" element={<Home />} />,
+      },
+    ],
+  },
+  {
+    path: 'login',
+    element: <RouteItem title="登录" element={<Login />} />,
+  },
+  {
+    path: '*',
+    element: <RouteItem title="页面未找到" element={<NotFound />} />,
+  },
+]
 
-const NotFound = () => <div>404</div>
+const RouteElements: FC = () => {
+  return useRoutes(routes)
+}
 
 const RenderRouter: FC = () => {
-  console.log(111)
   return (
     <BrowserRouter>
-      {/* <RouteElements /> */}
-      <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/login" />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
+      <RouteElements />
     </BrowserRouter>
   )
 }
