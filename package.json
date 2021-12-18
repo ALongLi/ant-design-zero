@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:dev": "tsc && vite build --mode development",
     "serve": "vite preview",
     "prepare": "husky install",
     "format": "prettier --write src",
@@ -38,7 +39,6 @@
     "eslint": "^8.4.1",
     "husky": "^7.0.4",
     "less": "^4.1.2",
-    "less-loader": "^10.2.0",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",

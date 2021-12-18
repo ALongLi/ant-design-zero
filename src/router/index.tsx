@@ -1,7 +1,7 @@
 import { lazy, FC } from 'react'
 import { RouteObject } from 'react-router'
 import { BrowserRouter, Routes, Route, useRoutes, Navigate } from 'react-router-dom'
-import Layout from '../components/Layout'
+import Layout from '@/components/Layout'
 
 import Home from '../pages/Home'
 import Login from '../pages/Login'
@@ -25,6 +25,7 @@ import Login from '../pages/Login'
 const NotFound = () => <div>404</div>
 
 const RenderRouter: FC = () => {
+  console.log(111)
   return (
     <BrowserRouter>
       {/* <RouteElements /> */}
