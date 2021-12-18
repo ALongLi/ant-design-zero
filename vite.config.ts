@@ -7,7 +7,7 @@ import vitePluginImp from 'vite-plugin-imp'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, __dirname) as ImportMetaEnv
   return {
-    base: env.BASE_URL,
+    base: env.VITE_BASE_URL,
     plugins: [
       react(),
       vitePluginImp({

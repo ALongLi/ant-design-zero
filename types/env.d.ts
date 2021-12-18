@@ -2,7 +2,10 @@
 
 interface ImportMetaEnv {
   readonly VITE_PORT: number
-  // 更多环境变量...
+  readonly VITE_BASE_URL: string
+  readonly VITE_BASE_API_URL: string
+  readonly VITE_APP_NAME: string
+  readonly VITE_APP_CORP_NAME: string
 }
 
 interface ImportMeta {
