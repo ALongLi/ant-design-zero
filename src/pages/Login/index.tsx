@@ -1,10 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Space } from 'antd'
 import { ProFormText, LoginForm } from '@ant-design/pro-form'
 import { LockOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons'
 import Footer from '@/components/Footer'
-import './index.less'
+import styles from './.module.less'
 
 const iconStyles = {
   marginLeft: '16px',
@@ -25,16 +24,16 @@ const mockWait = (time = 100) => {
 export default () => {
   const navigate = useNavigate()
   return (
-    <div className="p-login">
+    <div className={styles.login}>
       <LoginForm
         className="jc-center"
         title="Ant Design Zero"
         subTitle="A starting point for new web applications."
         actions={
-          <Space>
+          <>
             其他登录方式
             <WechatOutlined style={iconStyles} />
-          </Space>
+          </>
         }
         request={async (params) => {
           console.log(params)

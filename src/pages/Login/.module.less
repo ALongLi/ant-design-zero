@@ -1,4 +1,13 @@
-.p-login {
+:global {
+  @media (min-width: 768px) {
+    .ant-pro-form-login-container {
+      padding: 0 0 80px;
+      justify-content: center;
+    }
+  }
+}
+
+.login {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -8,9 +17,4 @@
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;
-
-  .ant-pro-form-login-container {
-    justify-content: center;
-    padding: 0 0 50px;
-  }
 }
