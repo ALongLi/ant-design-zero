@@ -2,7 +2,7 @@
 
 <div align="center">
 
-A starting point for new web applications with react, typescript, vite and ant-design.
+A starting point for new web applications with React, Typescript, Vite and Ant Design.
 
 </div>
 
