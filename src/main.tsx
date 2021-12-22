@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import RenderRouter from './router'
+import AppRouter from '@/components/AppRouter'
 import './styles/index.less'
 
-ReactDOM.render(<RenderRouter />, document.getElementById('root'))
+ReactDOM.render(<AppRouter />, document.getElementById('root'))
