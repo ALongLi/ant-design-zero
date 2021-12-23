@@ -1,8 +1,8 @@
-interface RouteItem {
+interface MenuItem {
   name: string
   path: string
   icon?: React.ReactNode
-  page?: () => Promise<{ default: React.ComponentType }>
+  page?: () => Promise<{ default: ComponentType }>
   hide?: false
-  children?: RouteItem[]
+  children?: MenuItem[]
 }

@@ -1,13 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Spin } from 'antd'
 
-interface FallbackLoadingProps {
-  tip?: string
-}
-
-const FallbackLoading: FC<FallbackLoadingProps> = ({ tip }) => {
+const FallbackLoading = ({ tip }: { tip?: string }) => {
+  const style = { display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }
   return (
-    <div className="h-full d-flex jc-center ai-center">
+    <div style={style}>
       <Spin size="large" tip={tip}></Spin>
     </div>
   )

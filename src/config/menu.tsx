@@ -1,7 +1,6 @@
-import React from 'react'
 import { SmileOutlined, CrownOutlined, TabletOutlined } from '@ant-design/icons'
 
-const routes: RouteItem[] = [
+const menu: MenuItem[] = [
   {
     name: '首页',
     path: '/',
@@ -10,23 +9,35 @@ const routes: RouteItem[] = [
   },
   {
     name: '页面二',
-    path: '/page1',
+    path: '/page2',
     icon: <CrownOutlined />,
     page: () => import('@/pages/Noop/Demo'),
   },
   {
-    name: '二级菜单',
-    path: '/menu2',
+    name: '菜单一',
+    path: '/menu1',
     icon: <TabletOutlined />,
     page: () => import('@/pages/Noop/Demo'),
     children: [
       {
-        name: '三级菜单',
-        path: '/menu2/menu3',
+        name: '页面三',
+        path: '/menu1/page3',
+        page: () => import('@/pages/Noop/Demo'),
+      },
+    ],
+  },
+  {
+    name: '菜单二',
+    path: '/menu2',
+    icon: <TabletOutlined />,
+    children: [
+      {
+        name: '子菜单',
+        path: '/menu2/submenu',
         children: [
           {
-            name: '页面三',
-            path: '/menu2/menu3/page3',
+            name: '页面五',
+            path: '/menu2/submenu/page5',
             page: () => import('@/pages/Noop/Demo'),
           },
         ],
@@ -40,4 +51,4 @@ const routes: RouteItem[] = [
   },
 ]
 
-export default routes
+export default menu

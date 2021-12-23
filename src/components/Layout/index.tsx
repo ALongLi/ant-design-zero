@@ -3,9 +3,9 @@ import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import SiderMenu from './SiderMenu'
-import UserAction from './UserAction'
+import UserActions from './UserActions'
 
-import styles from './.module.less'
+import './index.less'
 
 const { Header, Content, Sider } = Layout
 
@@ -15,8 +15,9 @@ export default () => {
   return (
     <Layout className="app-layout">
       <Header>
-        <div className={styles.logo} />
-        <UserAction />
+        <div className="app-layout__logo" />
+        <div className="app-layout__navs"></div>
+        <UserActions />
       </Header>
 
       <Layout>

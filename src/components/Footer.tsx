@@ -1,34 +1,20 @@
-import { GithubOutlined } from '@ant-design/icons'
-import { DefaultFooter } from '@ant-design/pro-layout'
+import React from 'react'
+import { CopyrightOutlined, GithubOutlined } from '@ant-design/icons'
 
-const Footer: React.FC = () => {
-  const corp = import.meta.env.VITE_APP_CORP_NAME
-  const copyright = corp ? `${new Date().getFullYear()} ${corp}` : undefined
-
+const Footer = () => {
+  const corpName = import.meta.env.VITE_APP_CORP_NAME
+  const copyright = `${new Date().getFullYear()} ${corpName}`
   return (
-    <DefaultFooter
-      copyright={copyright}
-      links={[
-        {
-          key: '1',
-          title: 'Ant Design Zero',
-          href: 'https://github.com/liamwang/ant-design-zero',
-          blankTarget: true,
-        },
-        {
-          key: '2',
-          title: <GithubOutlined />,
-          href: 'https://github.com/liamwang/ant-design-zero',
-          blankTarget: true,
-        },
-        {
-          key: '3',
-          title: 'Liam Wang',
-          href: 'https://github.com/liamwang',
-          blankTarget: true,
-        },
-      ]}
-    />
+    <div className="app-footer" style={{ textAlign: 'center', fontSize: '12px' }}>
+      {corpName ? (
+        <span>
+          <CopyrightOutlined /> {copyright}
+        </span>
+      ) : null}
+      <a target="_blank" href="https://github.com/liamwang/ant-design-zero">
+        <GithubOutlined />
+      </a>
+    </div>
   )
 }
 
