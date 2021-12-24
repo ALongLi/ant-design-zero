@@ -6,3 +6,9 @@ interface MenuItem {
   hide?: false
   children?: MenuItem[]
 }
+
+/**
+ * HSC: Header Sider Content
+ * SHC: Sider Header Content
+ */
+type LayoutType = 'HSC' | 'SHC'

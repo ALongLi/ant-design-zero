@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
-import SiderMenu from './SiderMenu'
-import UserActions from './UserActions'
+import SiderMenu from './components/SiderMenu'
+import UserActions from './components/UserActions'
 
-import './index.less'
+import './LayoutHSC.less'
 
 const { Header, Content, Sider } = Layout
 
@@ -13,10 +13,10 @@ export default () => {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
-    <Layout className="app-layout">
+    <Layout className="app-layout app-layout-hsc">
       <Header>
-        <div className="app-layout__logo" />
-        <div className="app-layout__navs"></div>
+        <div className="app-layout-logo" />
+        <div className="app-layout-navs"></div>
         <UserActions />
       </Header>
 
@@ -30,7 +30,7 @@ export default () => {
           width={208}
           collapsedWidth={48}
         >
-          <SiderMenu />
+          {/* <SiderMenu /> */}
         </Sider>
         <Content style={{ marginLeft: collapsed ? '48px' : '208px' }}>
           <Outlet />

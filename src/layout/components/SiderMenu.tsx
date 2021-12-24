@@ -1,9 +1,18 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Menu } from 'antd'
+import { Menu, Layout } from 'antd'
+import type { MenuTheme } from 'antd'
 import menu from '@/config/menu'
 
-export default () => {
+export default ({
+  theme,
+  collapsed,
+  logo,
+}: {
+  theme: MenuTheme
+  collapsed: boolean
+  logo: React.ReactNode
+}) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
@@ -14,7 +23,7 @@ export default () => {
   useEffect(() => {
     setOpenKeysByPath(pathname)
     setSelectedKey(pathname)
-  }, [pathname])
+  }, [pathname, collapsed])
 
   function setOpenKeysByPath(path: string) {
     const openKeys = subMenuKeys.filter((x) => path.startsWith(x))
@@ -51,16 +60,26 @@ export default () => {
   }
 
   return (
-    <Menu
-      mode="inline"
-      theme="light"
-      inlineIndent={16}
-      openKeys={openKeys}
-      onOpenChange={onOpenChange}
-      selectedKeys={[selectedKey]}
-      onSelect={({ key }) => navigate(key)}
+    <Layout.Sider
+      theme="dark"
+      collapsible
+      collapsed={collapsed}
+      trigger={null}
+      width={208}
+      collapsedWidth={48}
     >
-      {renderMenu(menu)}
-    </Menu>
+      {logo}
+      <Menu
+        mode="inline"
+        theme={theme}
+        inlineIndent={16}
+        openKeys={openKeys}
+        onOpenChange={onOpenChange}
+        selectedKeys={[selectedKey]}
+        onSelect={({ key }) => navigate(key)}
+      >
+        {renderMenu(menu)}
+      </Menu>
+    </Layout.Sider>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProFormText, LoginForm } from '@ant-design/pro-form'
 import { LockOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons'
-import Footer from '@/components/Footer'
+import Footer from '@/layout/components/Footer'
 import styles from './.module.less'
 
 const mockWait = (time = 100) => {
