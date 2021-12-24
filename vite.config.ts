@@ -39,5 +39,8 @@ export default defineConfig(({ mode }) => {
     build: {
       chunkSizeWarningLimit: 2000,
     },
+    optimizeDeps: {
+      include: ['antd/es/spin/style', 'antd/es/layout/style', 'antd/es/menu/style'],
+    },
   }
 })
