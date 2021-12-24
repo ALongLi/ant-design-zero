@@ -2,12 +2,12 @@
 
 .app-layout {
   min-height: 100vh;
+  background: #f4f6f9;
   padding-top: 48px;
-
   &-logo {
-    width: 120px;
+    width: 180px;
     height: 32px;
-    margin: 8px 24px 8px 0;
+    margin: 8px 16px;
     background: rgba(255, 255, 255, 0.3);
   }
 
@@ -16,26 +16,28 @@
   }
 
   &-action {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     padding: 0 12px;
     cursor: pointer;
     &:hover {
-      background-color: #f6f6f6;
+      background: #252a3d;
     }
   }
 
   .ant-layout-header {
     position: fixed;
     top: 0;
-    left: 0;
+    width: 100%;
     display: flex;
     align-items: center;
-    color: #fff;
-    width: 100%;
     height: @headerHeight;
     line-height: @headerHeight;
-    padding: 0 16px;
-    z-index: 100;
+    padding: 0 8px 0 0;
+    color: #fff;
+    background: #001529;
+    box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+    z-index: 2;
   }
 
   .ant-layout-sider {
@@ -43,14 +45,24 @@
     top: 0;
     left: 0;
     height: 100%;
+    padding-top: 48px;
     display: flex;
     flex-direction: column;
-    padding-top: @headerHeight;
     box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
     z-index: 1;
 
     &-has-trigger {
       padding-bottom: 0;
+    }
+
+    &-trigger {
+      font-size: 16px;
+      height: 40px;
+      line-height: 40px;
+      border-top: 1px solid #f2f2f2;
+      &:hover {
+        background: #f8f9fa;
+      }
     }
 
     &-children {
@@ -64,31 +76,26 @@
       }
       &::-webkit-scrollbar-thumb {
         background: hsla(0, 0%, 100%, 0.2);
-        border-radius: 3px;
+        border-radius: 2px;
         box-shadow: inset 0 0 5px hsl(0deg 0% 100% / 5%);
       }
       &::-webkit-scrollbar-track {
         background: hsla(0, 0%, 100%, 0.15);
-        border-radius: 3px;
         box-shadow: inset 0 0 5px rgb(37 37 37 / 5%);
       }
+
       .ant-menu {
-        background: 0 0;
         .anticon {
           min-width: 16px;
           font-size: 16px;
         }
-      }
-    }
-
-    &-trigger {
-      position: relative;
-      font-size: 16px;
-      height: 40px;
-      line-height: 40px;
-      border-top: 1px solid #f2f2f2;
-      &:hover {
-        background: #fafafa;
+        .ant-menu-item {
+          height: 46px;
+          line-height: 46px;
+        }
+        .ant-menu-title-content {
+          margin-left: 10px;
+        }
       }
     }
 
@@ -96,18 +103,45 @@
       .ant-layout-sider-children {
         &::-webkit-scrollbar-thumb {
           background: rgba(0, 0, 0, 0.12);
-          border-radius: 0px;
+          border-radius: 2px;
           box-shadow: inset 0 0 5px rgb(0 21 41 / 5%);
         }
         &::-webkit-scrollbar-track {
           background: rgba(0, 0, 0, 0.06);
-          border-radius: 0px;
           box-shadow: inset 0 0 5px rgb(0 21 41 / 5%);
         }
       }
     }
   }
+
   .ant-layout-content {
     padding: 20px;
+  }
+}
+
+.app-layout.app-layout-shc {
+  .ant-layout-header {
+    color: inherit;
+    background: #fff;
+  }
+  .ant-layout-sider {
+    padding-top: 0;
+    z-index: 3;
+  }
+  .app-layout-logo {
+    width: auto;
+    margin: 8px;
+  }
+  .app-layout-trigger {
+    display: inline-block;
+    font-size: 16px;
+    padding: 0 12px;
+    cursor: pointer;
+    &:hover {
+      background: #f8f9fa;
+    }
+  }
+  .app-layout-action:hover {
+    background: #f8f9fa;
   }
 }

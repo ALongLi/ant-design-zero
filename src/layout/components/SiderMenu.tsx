@@ -4,15 +4,14 @@ import { Menu, Layout } from 'antd'
 import type { MenuTheme } from 'antd'
 import menu from '@/config/menu'
 
-export default ({
-  theme,
-  collapsed,
-  logo,
-}: {
+interface SiderMenuProps {
   theme: MenuTheme
   collapsed: boolean
-  logo: React.ReactNode
-}) => {
+  trigger: React.ReactNode
+  logo?: React.ReactNode
+}
+
+export default (props: SiderMenuProps) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
@@ -21,9 +20,9 @@ export default ({
   const subMenuKeys = getSubMenuKeys(menu)
 
   useEffect(() => {
-    setOpenKeysByPath(pathname)
     setSelectedKey(pathname)
-  }, [pathname, collapsed])
+    setOpenKeysByPath(pathname)
+  }, [pathname, props.collapsed])
 
   function setOpenKeysByPath(path: string) {
     const openKeys = subMenuKeys.filter((x) => path.startsWith(x))
@@ -44,6 +43,11 @@ export default ({
     lastOpenKey ? setOpenKeysByPath(lastOpenKey) : setOpenKeys(keys)
   }
 
+  function onSelect({ key }: { key: string }) {
+    setSelectedKey(key)
+    navigate(key)
+  }
+
   function renderMenu(items: MenuItem[]) {
     const menuItems = items.filter((item) => !item.hide)
     return menuItems.map((item) => {
@@ -61,22 +65,22 @@ export default ({
 
   return (
     <Layout.Sider
-      theme="dark"
+      theme={props.theme}
       collapsible
-      collapsed={collapsed}
-      trigger={null}
-      width={208}
+      collapsed={props.collapsed}
+      trigger={props.trigger}
+      width={210}
       collapsedWidth={48}
     >
-      {logo}
+      {props.logo}
       <Menu
         mode="inline"
-        theme={theme}
+        theme={props.theme}
         inlineIndent={16}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
         selectedKeys={[selectedKey]}
-        onSelect={({ key }) => navigate(key)}
+        onSelect={onSelect}
       >
         {renderMenu(menu)}
       </Menu>

@@ -8,13 +8,13 @@ import { menuToRoutes } from '@/utils/router'
 
 import './styles/index.less'
 
-const Layout = lazy(() => import('@/layout/LayoutSHC'))
+const Layout = lazy(() => import('@/layout/Layout'))
 const Login = lazy(() => import('@/pages/Login'))
 
 const routeObjects: RouteObject[] = [
   {
     path: '/',
-    element: <RouteWrapper element={<Layout />} />,
+    element: <RouteWrapper element={<Layout type="SHC" />} />,
     children: menuToRoutes(menu),
   },
   {
