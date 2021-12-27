@@ -1,10 +1,10 @@
-import { SmileOutlined, CrownOutlined, TabletOutlined } from '@ant-design/icons'
+import { HomeOutlined, CrownOutlined, TabletOutlined } from '@ant-design/icons'
 
 const menu: MenuItem[] = [
   {
     name: '首页',
     path: '/',
-    icon: <SmileOutlined />,
+    icon: <HomeOutlined />,
     page: () => import('@/pages/Home'),
   },
   {

@@ -12,6 +12,8 @@ import './Layout.less'
 export default ({ type }: { type: LayoutType }) => {
   const [collapsed, setCollapsed] = useState(false)
 
+  const LogoCom = <Logo collapsed={collapsed} />
+
   const Trigger = () => (
     <div className="app-layout-trigger" onClick={() => setCollapsed(!collapsed)}>
       {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -29,7 +31,7 @@ export default ({ type }: { type: LayoutType }) => {
   const LayoutHSC = (
     <Layout className="app-layout app-layout-hsc">
       <Layout.Header>
-        <Logo />
+        {LogoCom}
         <HeaderNavs />
         <UserActions />
       </Layout.Header>
@@ -42,7 +44,7 @@ export default ({ type }: { type: LayoutType }) => {
 
   const LayoutSHC = (
     <Layout className="app-layout app-layout-shc">
-      <SiderMenu theme="dark" collapsed={collapsed} logo={<Logo />} trigger={null} />
+      <SiderMenu theme="dark" collapsed={collapsed} logo={LogoCom} trigger={null} />
       <Layout style={{ marginLeft: collapsed ? '48px' : '210px' }}>
         <Layout.Header style={{ width: `calc(100% - ${collapsed ? 48 : 210}px)` }}>
           <Trigger />

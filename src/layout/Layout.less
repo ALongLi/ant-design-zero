@@ -3,12 +3,26 @@
 .app-layout {
   min-height: 100vh;
   background: #f4f6f9;
-  padding-top: 48px;
+  padding-top: @headerHeight;
   &-logo {
-    width: 180px;
-    height: 32px;
-    margin: 8px 16px;
-    background: rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 16px;
+    > img {
+      height: 28px;
+      margin-right: 10px;
+    }
+    > h1 {
+      margin: 0;
+      display: inline-block;
+      color: #fff;
+      font-size: 18px;
+      height: 28px;
+      line-height: 28px;
+      vertical-align: middle;
+    }
   }
 
   &-navs {
@@ -61,7 +75,7 @@
       line-height: 40px;
       border-top: 1px solid #f2f2f2;
       &:hover {
-        background: #f8f9fa;
+        background: rgba(0, 0, 0, 0.025);
       }
     }
 
@@ -130,18 +144,19 @@
   }
   .app-layout-logo {
     width: auto;
-    margin: 8px;
+    padding: 16px 8px;
   }
   .app-layout-trigger {
     display: inline-block;
     font-size: 16px;
     padding: 0 12px;
     cursor: pointer;
+    margin-right: 4px;
     &:hover {
-      background: #f7f8f9;
+      background: rgba(0, 0, 0, 0.025);
     }
   }
   .app-layout-action:hover {
-    background: #f7f8f9;
+    background: rgba(0, 0, 0, 0.025);
   }
 }

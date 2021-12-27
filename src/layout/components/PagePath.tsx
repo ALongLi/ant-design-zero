@@ -33,7 +33,7 @@ const PagePath = () => {
     </Breadcrumb.Item>,
   ].concat(breadcrumbItems)
 
-  return <Breadcrumb style={{ padding: '0 4px' }}>{breadcrumbItems}</Breadcrumb>
+  return <Breadcrumb>{breadcrumbItems}</Breadcrumb>
 }
 
 export default PagePath
