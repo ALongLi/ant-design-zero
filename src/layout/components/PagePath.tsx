@@ -1,23 +1,28 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Breadcrumb } from 'antd'
+import menu from '@/config/menu'
 
-const breadcrumbNameMap = {
-  '/apps': 'Application List',
-  '/apps/1': 'Application1',
-  '/apps/2': 'Application2',
-  '/apps/1/detail': 'Detail',
-  '/apps/2/detail': 'Detail',
+const getPathNameMap = (menuItems: MenuItem[]) => {
+  let result = {}
+  for (const item of menuItems) {
+    result[item.path] = item.name
+    if (item.children) {
+      result = { ...result, ...getPathNameMap(item.children) }
+    }
+  }
+  return result
 }
 
 const PagePath = () => {
-  const location = useLocation()
-  const segments = location.pathname.split('/').filter((i) => i)
+  const { pathname } = useLocation()
+  const pathNameMap = getPathNameMap(menu)
+  const segments = pathname.split('/').filter((i) => i)
   let breadcrumbItems = segments.map((_, index) => {
     const url = `/${segments.slice(0, index + 1).join('/')}`
     return (
       <Breadcrumb.Item key={url}>
-        <Link to={url}>{breadcrumbNameMap[url]}</Link>
+        <Link to={url}>{pathNameMap[url]}</Link>
       </Breadcrumb.Item>
     )
   })
@@ -28,7 +33,7 @@ const PagePath = () => {
     </Breadcrumb.Item>,
   ].concat(breadcrumbItems)
 
-  return <Breadcrumb>{breadcrumbItems}</Breadcrumb>
+  return <Breadcrumb style={{ padding: '0 4px' }}>{breadcrumbItems}</Breadcrumb>
 }
 
 export default PagePath

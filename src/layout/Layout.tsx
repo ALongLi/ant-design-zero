@@ -3,8 +3,9 @@ import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import SiderMenu from './components/SiderMenu'
-import UserActions from './components/UserActions'
 import Logo from './components/Logo'
+import PagePath from './components/PagePath'
+import UserActions from './components/UserActions'
 
 import './Layout.less'
 
@@ -45,6 +46,7 @@ export default ({ type }: { type: LayoutType }) => {
       <Layout style={{ marginLeft: collapsed ? '48px' : '210px' }}>
         <Layout.Header style={{ width: `calc(100% - ${collapsed ? 48 : 210}px)` }}>
           <Trigger />
+          <PagePath />
           <HeaderNavs />
           <UserActions />
         </Layout.Header>
