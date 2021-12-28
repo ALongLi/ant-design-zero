@@ -21,7 +21,7 @@ export default (props: SiderMenuProps) => {
 
   useEffect(() => {
     setSelectedKey(pathname)
-    setOpenKeysByPath(pathname)
+    !props.collapsed && setOpenKeysByPath(pathname)
   }, [pathname, props.collapsed])
 
   function setOpenKeysByPath(path: string) {
