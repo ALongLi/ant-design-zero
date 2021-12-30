@@ -26,8 +26,10 @@ const routeObjects: RouteObject[] = [
 const RouteElements = () => useRoutes(routeObjects)
 
 ReactDOM.render(
-  <BrowserRouter>
-    <RouteElements />
-  </BrowserRouter>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <RouteElements />
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root')
 )
