@@ -1,12 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Router from '@/context/router'
+import { Router, Routes } from '@/context/router'
+import AuthProvider from '@/context/auth'
 
 import './styles/index.less'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router />
+    <Router>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 )

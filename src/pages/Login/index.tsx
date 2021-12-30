@@ -1,8 +1,7 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { ProFormText, LoginForm } from '@ant-design/pro-form'
 import { LockOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons'
 import Footer from '@/layout/components/Footer'
+import { useAuth } from '@/context/auth'
 import styles from './.module.less'
 
 const mockWait = (time = 100) => {
@@ -14,7 +13,7 @@ const mockWait = (time = 100) => {
 }
 
 export default () => {
-  const navigate = useNavigate()
+  const auth = useAuth()
   return (
     <div className={styles.login}>
       <LoginForm
@@ -26,15 +25,12 @@ export default () => {
             <WechatOutlined className={styles.openicon} />
           </>
         }
-        request={async (params) => {
-          console.log(params)
+        request={async () => {
           await mockWait(200)
-          return {}
+          return { username: '', password: '' }
         }}
-        onFinish={async (values) => {
-          await mockWait(1000)
-          console.log(values)
-          navigate('/')
+        onFinish={async (values: LoginForm) => {
+          await auth.login(values)
         }}
       >
         <ProFormText
@@ -57,7 +53,7 @@ export default () => {
             size: 'large',
             prefix: <LockOutlined className={'prefixIcon'} />,
           }}
-          placeholder={'密码: 1111'}
+          placeholder={'密码: admin'}
           rules={[
             {
               required: true,
