@@ -40,7 +40,13 @@ export default defineConfig(({ mode }) => {
       chunkSizeWarningLimit: 2000,
     },
     optimizeDeps: {
-      include: ['antd/es/spin/style', 'antd/es/layout/style', 'antd/es/menu/style'],
+      include: [
+        'antd/es/spin/style',
+        'antd/es/layout/style',
+        'antd/es/menu/style',
+        'antd/es/breadcrumb/style',
+        'antd/es/dropdown/style',
+      ],
     },
   }
 })
