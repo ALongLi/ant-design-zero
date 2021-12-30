@@ -32,5 +32,5 @@ Modern browsers and IE11.
 Any type of contribution is welcome, here are some examples of how you may contribute to this project:
 
 - Use Ant Design Pro in your daily work.
-- Submit [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-- Propose [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+- Submit [issues](https://github.com/liamwang/ant-design-zero/issues) to report bugs or ask questions.
+- Propose [pull requests](https://github.com/liamwang/ant-design-zero/pulls) to improve our code.
