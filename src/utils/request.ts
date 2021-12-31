@@ -2,9 +2,9 @@ import { message } from 'antd'
 import { trimRight, queryString } from './string'
 import { getAuthData } from './storage'
 
-type HttpMethod = 'get' | 'post' | 'put' | 'delete'
+type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete'
 
-const handleResponseError = (code: number, msg?: string) => {
+const handleErrorCode = (code: number, msg?: string) => {
   switch (code) {
     case 401:
       location.href = '/login'
@@ -18,9 +18,8 @@ const handleResponseError = (code: number, msg?: string) => {
     case 400:
       message.error(msg || '请求出错')
       break
-    case 504:
     default:
-      message.error(msg || '网络异常')
+      message.error(msg || '服务器异常')
   }
 }
 
@@ -30,14 +29,14 @@ class Request {
     this.baseUrl = trimRight(baseUrl, '/')
   }
 
-  // Promise<ApiResult<TResult>>|Promise<never>
-  run(path: string, method: HttpMethod, data: object) {
+  send(path: string, method: HttpMethod, data: object) {
     const { accessToken } = getAuthData() || {}
-    let url = path.startsWith('/') ? path : `${this.baseUrl}/${path}`
-    if (method == 'get') {
+    const dataInUrl = method === 'get' || method === 'delete'
+    let url = /^https?:\/\//.test(path) ? path : `${this.baseUrl}/${path}`
+    if (dataInUrl) {
       const qs = queryString(data)
       if (qs) {
-        url += '?' + queryString(data)
+        url += '?' + qs
       }
     }
     return fetch(url, {
@@ -46,30 +45,52 @@ class Request {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
-      body: method === 'get' ? undefined : JSON.stringify(data),
+      body: dataInUrl ? undefined : JSON.stringify(data),
     })
       .then(async (response) => {
-        response
-          .json()
-          .then((result) => {
-            if (result.code === 0) {
-              return result.data
-            }
-            return Promise.reject(result)
-          })
-          .catch((reason) => {
-            message.error(reason + '')
-          })
-      })
-      .catch((reason) => {
-        console.log(111)
-        if (reason.code) {
-          handleResponseError(reason.code, reason.message)
-        } else {
-          message.error(reason)
+        if (response.ok) {
+          const result = await response.json()
+          if (result.code === 0 || result.code === 200) {
+            return result.data
+          }
+          if (result.code) {
+            handleErrorCode(result.code, result.message)
+            return new Promise(() => null)
+          }
         }
+        return Promise.reject(response)
+      })
+      .catch((error) => {
+        if (typeof error == 'object' && error.status) {
+          handleErrorCode(error.status)
+        } else {
+          message.error('网络异常')
+        }
+        throw error
       })
   }
+
+  get(path: string, params: object) {
+    return this.send(path, 'get', params)
+  }
+
+  post(path: string, data: object) {
+    return this.send(path, 'post', data)
+  }
+
+  put(path: string, data: object) {
+    return this.send(path, 'put', data)
+  }
+
+  patch(path: string, data: object) {
+    return this.send(path, 'patch', data)
+  }
+
+  delete(path: string, params: object) {
+    return this.send(path, 'delete', params)
+  }
 }
+
+export default Request
 
 export const request = new Request(import.meta.env.VITE_BASE_API_URL)

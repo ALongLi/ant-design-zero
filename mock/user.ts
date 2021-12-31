@@ -52,4 +52,12 @@ export default [
       },
     },
   },
+  {
+    url: '/api/err',
+    method: 'get',
+    rawResponse: async (req, res) => {
+      res.statusCode = 404
+      res.end(`hello`)
+    },
+  },
 ] as MockMethod[]

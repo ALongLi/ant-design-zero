@@ -25,14 +25,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  // userService.getUserInfo().then((data) => {
-  //   console.log(data)
-  // })
-
-  request.run('user1', 'get', {}).then((data) => {
-    console.log('data:', data)
-  })
-
   const login = async (form: LoginForm) => {
     const authData = await userService.login(form)
     setAuthData(authData)
