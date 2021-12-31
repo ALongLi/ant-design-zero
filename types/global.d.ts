@@ -19,7 +19,7 @@ interface MenuItem {
  */
 type LayoutType = 'HSC' | 'SHC'
 
-interface AuthResult {
+interface AuthData {
   accessToken: string
   expiresAt: number
   refreshToken: string

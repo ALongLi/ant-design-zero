@@ -4,7 +4,7 @@ import { getAuthData, setAuthData } from '@/utils/storage'
 import * as userService from '@/service/user'
 
 interface AuthContextType {
-  auth: AuthResult | null
+  auth: AuthData | null
   login: (form: LoginForm) => Promise<void>
   logout: () => Promise<void>
 }

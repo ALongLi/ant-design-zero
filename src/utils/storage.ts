@@ -1,25 +1,27 @@
 const cache = {}
 
-const authKey = '__auth__'
-
-export const getAuthData = (): AuthResult | null => {
-  if (cache[authKey]) {
-    return cache[authKey]
+const getItem = <T>(key: string, isPrimitive = false): T | null => {
+  if (cache[key]) {
+    return cache[key]
   }
-  const text = window.localStorage.getItem(authKey)
+  const text = localStorage.getItem(key)
   if (text) {
-    cache[authKey] = JSON.parse(text)
-    return cache[authKey]
+    cache[key] = (isPrimitive ? text : JSON.parse(text)) as T
+    return cache[key]
   }
   return null
 }
 
-export const setAuthData = (data: AuthResult | null) => {
-  if (!data) {
-    cache[authKey] = null
-    window.localStorage.removeItem(authKey)
+const setItem = <T>(key: string, item: T, isPrimitive = false) => {
+  if (!item) {
+    cache[key] = null
+    localStorage.removeItem(key)
     return
   }
-  cache[authKey] = data
-  window.localStorage.setItem(authKey, JSON.stringify(data))
+  cache[key] = item
+  localStorage.setItem(key, isPrimitive ? String(item) : JSON.stringify(item))
 }
+
+const AUTH_KEY = '__AUTH_KEY__'
+export const getAuthData = () => getItem<AuthData>(AUTH_KEY)
+export const setAuthData = (data: AuthData | null) => setItem(AUTH_KEY, data)
