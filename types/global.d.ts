@@ -1,9 +1,3 @@
-interface ApiResponse<TData> {
-  code: number
-  data?: TData
-  message?: string
-}
-
 interface MenuItem {
   name: string
   path: string
@@ -18,6 +12,12 @@ interface MenuItem {
  * SHC: Sider Header Content
  */
 type LayoutType = 'HSC' | 'SHC'
+
+interface ApiResult<TData> {
+  code: number
+  data?: TData
+  message?: string
+}
 
 interface AuthData {
   accessToken: string

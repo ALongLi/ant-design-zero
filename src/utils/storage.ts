@@ -22,6 +22,11 @@ const setItem = <T>(key: string, item: T, isPrimitive = false) => {
   localStorage.setItem(key, isPrimitive ? String(item) : JSON.stringify(item))
 }
 
+export const clear = () => {
+  Object.keys(cache).forEach((key) => (cache[key] = undefined))
+  localStorage.clear()
+}
+
 const AUTH_KEY = '__AUTH_KEY__'
 export const getAuthData = () => getItem<AuthData>(AUTH_KEY)
 export const setAuthData = (data: AuthData | null) => setItem(AUTH_KEY, data)

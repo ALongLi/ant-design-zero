@@ -1,9 +1,6 @@
 import { MockMethod } from 'vite-plugin-mock'
 
-const mockPost = <TResData>(
-  url: string,
-  fnOrObj: (payload) => ApiResponse<TResData>
-): MockMethod => {
+const mockPost = <TResData>(url: string, fnOrObj: (payload) => ApiResult<TResData>): MockMethod => {
   return {
     url: url,
     method: 'post',
@@ -46,10 +43,13 @@ export default [
     url: '/api/user',
     method: 'get',
     response: {
-      id: 1,
-      name: 'Admin',
-      roles: ['admin'],
-      avatar: '',
+      code: 400,
+      data: {
+        id: 1,
+        name: 'Admin',
+        roles: ['admin'],
+        avatar: '',
+      },
     },
   },
 ] as MockMethod[]

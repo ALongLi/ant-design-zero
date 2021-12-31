@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { Navigate, useNavigate, useLocation } from 'react-router-dom'
 import { getAuthData, setAuthData } from '@/utils/storage'
+import { request } from '@/utils/request'
 import * as userService from '@/service/user'
 
 interface AuthContextType {
@@ -23,6 +24,14 @@ export const useAuth = () => {
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+
+  // userService.getUserInfo().then((data) => {
+  //   console.log(data)
+  // })
+
+  request.run('user1', 'get', {}).then((data) => {
+    console.log('data:', data)
+  })
 
   const login = async (form: LoginForm) => {
     const authData = await userService.login(form)
