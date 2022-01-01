@@ -14,7 +14,7 @@ const getItem = <T>(key: string, isPrimitive = false): T | null => {
 
 const setItem = <T>(key: string, item: T, isPrimitive = false) => {
   if (!item) {
-    cache[key] = null
+    cache[key] = undefined
     localStorage.removeItem(key)
     return
   }
@@ -29,4 +29,4 @@ export const clear = () => {
 
 const AUTH_KEY = '__AUTH_KEY__'
 export const getAuthData = () => getItem<AuthData>(AUTH_KEY)
-export const setAuthData = (data: AuthData | null) => setItem(AUTH_KEY, data)
+export const setAuthData = (data: AuthData | unknown) => setItem(AUTH_KEY, data)

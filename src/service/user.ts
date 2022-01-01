@@ -1,6 +1,9 @@
 import { http } from '@/utils/http'
 
-export const login = (data: { username: string; password: string }) => {
+export const login = (data: {
+  username: string
+  password: string
+}): Promise<AuthData | unknown> => {
   return http.post('token', { ...data, grantType: 'password' })
 }
 
