@@ -1,9 +1,7 @@
 import { ProFormText, LoginForm } from '@ant-design/pro-form'
 import { LockOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons'
 import Footer from '@/layout/components/Footer'
-import { useMount } from '@/hooks'
 import { useAuth } from '@/context/auth'
-import { clear } from '@/utils/storage'
 import styles from './.module.less'
 
 const mockWait = (time = 100) => {
@@ -15,7 +13,6 @@ const mockWait = (time = 100) => {
 }
 
 export default () => {
-  useMount(clear)
   const auth = useAuth()
   return (
     <div className={styles.login}>

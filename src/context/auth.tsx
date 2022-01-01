@@ -1,7 +1,5 @@
-import React, { ReactNode, useEffect } from 'react'
-import { Navigate, useNavigate, useLocation } from 'react-router-dom'
+import React, { ReactNode } from 'react'
 import { getAuthData, setAuthData } from '@/utils/storage'
-import { request } from '@/utils/request'
 import * as userService from '@/service/user'
 
 interface AuthContextType {
@@ -22,25 +20,21 @@ export const useAuth = () => {
 }
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const navigate = useNavigate()
-  const { pathname } = useLocation()
-
   const login = async (form: LoginForm) => {
     const authData = await userService.login(form)
     setAuthData(authData)
-    navigate('/')
+    location.href = '/'
   }
 
   const logout = async () => {
-    await userService.logout()
     setAuthData(null)
-    navigate('/login')
+    location.reload()
   }
 
   const auth = getAuthData()
-
-  if (!auth && pathname !== '/login') {
-    return <Navigate to="/login" />
+  const path = location.pathname.toLocaleLowerCase()
+  if (!auth && !path.startsWith('/login')) {
+    location.href = '/login'
   }
 
   return <AuthContext.Provider children={children} value={{ auth, login, logout }} />

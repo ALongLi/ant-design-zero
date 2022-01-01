@@ -46,3 +46,9 @@ const routeObjects: RouteObject[] = [
 export const Routes = () => useRoutes(routeObjects)
 
 export const Router = BrowserRouter
+
+export default () => (
+  <Router>
+    <Routes />
+  </Router>
+)

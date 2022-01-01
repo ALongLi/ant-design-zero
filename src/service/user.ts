@@ -1,11 +1,9 @@
-import { request } from '@/utils/request'
+import { http } from '@/utils/http'
 
 export const login = (data: { username: string; password: string }) => {
-  return request.post('token', { ...data, grantType: 'password' })
+  return http.post('token', { ...data, grantType: 'password' })
 }
 
 export const refreshToken = (data: { refreshToken: string }) => {
-  return request.post('token', { ...data, grantType: 'refresh_token' })
+  return http.post('token', { ...data, grantType: 'refresh_token' })
 }
-
-export const logout = () => Promise.resolve()

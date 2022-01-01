@@ -44,6 +44,7 @@ export default [
     method: 'get',
     response: {
       code: 400,
+      message: '来自服务端的错误消息',
       data: {
         id: 1,
         name: 'Admin',
