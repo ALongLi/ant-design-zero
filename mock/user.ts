@@ -1,6 +1,6 @@
 import { MockMethod } from 'vite-plugin-mock'
 
-const mockPost = <TResData>(url: string, fnOrObj: (payload) => ApiResult<TResData>): MockMethod => {
+const mockPost = (url: string, fnOrObj): MockMethod => {
   return {
     url: url,
     method: 'post',
@@ -43,8 +43,7 @@ export default [
     url: '/api/user',
     method: 'get',
     response: {
-      code: 400,
-      message: '来自服务端的错误消息',
+      code: 0,
       data: {
         id: 1,
         name: 'Admin',
@@ -54,7 +53,15 @@ export default [
     },
   },
   {
-    url: '/api/err',
+    url: '/api/err1',
+    method: 'get',
+    response: {
+      code: 400,
+      message: '来自服务端的错误消息',
+    },
+  },
+  {
+    url: '/api/err2',
     method: 'get',
     rawResponse: async (req, res) => {
       res.statusCode = 404

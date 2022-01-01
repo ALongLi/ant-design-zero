@@ -2,6 +2,21 @@ import { message as Message } from 'antd'
 import { trimRight, queryString } from './string'
 import { getAuthData, clear } from './storage'
 
+export class RequestError extends Error {
+  handled: boolean
+  constructor(message?: string, handled = true) {
+    super(message)
+    this.name = 'RequestError'
+    this.handled = handled
+  }
+}
+
+export interface RequestConfig {
+  method?: 'get' | 'post' | 'put' | 'patch' | 'delete'
+  data?: object
+  params?: object
+}
+
 const errorMap = {
   '400': '请求出错',
   '401': '请重新登录',
@@ -11,32 +26,36 @@ const errorMap = {
   default: '服务器异常',
 }
 
-const handleError = (code: number, message?: string) => {
+const handleError = (code: number, message?: string | undefined) => {
   if (code === 401) {
     clear()
     location.reload()
   }
-  return Promise.reject({ message: message || errorMap[code] || errorMap['default'] })
-}
-
-interface RequestConfig {
-  method: 'get' | 'post' | 'put' | 'patch' | 'delete'
-  data?: object
-  params?: object
+  return new RequestError(message || errorMap[code] || errorMap['default'])
 }
 
 class Http {
-  baseUrl: string
-  constructor(baseUrl: string) {
+  private baseUrl: string
+  private constructor(baseUrl: string) {
     this.baseUrl = trimRight(baseUrl, '/')
   }
 
-  request(path: string, config: RequestConfig = { method: 'get' }) {
-    let url = /^(https?|\/\/):/.test(path) ? path : `${this.baseUrl}/${path}`
+  private static container: Record<string, Http> = {}
+  static getInstance(baseUrl: string): Http {
+    if (this.container[baseUrl]) {
+      return this.container[baseUrl]
+    }
+    return new Http(baseUrl)
+  }
+
+  request<TData>(path: string, config: RequestConfig = {}): Promise<TData | undefined> {
+    let url = /^(https?:)|\//.test(path) ? path : `${this.baseUrl}/${path}`
     if (config.params && Object.keys(config.params).length > 0) {
       url += '?' + queryString(config.params)
     }
+
     const { accessToken } = getAuthData() || {}
+
     return fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -47,28 +66,23 @@ class Http {
     })
       .then(async (response) => {
         if (response.ok) {
-          const result = await response.json()
+          const result: ApiResult<TData> = await response.json()
           if (result.code === 0 || result.code === 200) {
             return result.data
           }
           if (result.code) {
-            return handleError(result.code, result.message)
+            throw handleError(result.code, result.message)
           }
         }
-        return handleError(response.status)
+        throw handleError(response.status)
       })
-      .catch((error) => {
-        if (typeof error == 'object' && error.message) {
-          Message.error(error.message)
-          throw 0
-        } else {
-          Message.error('请求出错')
-          throw error
-        }
+      .catch((e) => {
+        Message.error(e instanceof RequestError ? e.message : '错误请求')
+        throw e
       })
   }
 
-  get(path: string, params: object) {
+  get(path: string, params?: object) {
     return this.request(path, { method: 'get', params })
   }
 
@@ -84,11 +98,11 @@ class Http {
     return this.request(path, { method: 'patch', data })
   }
 
-  delete(path: string, params: object) {
+  delete(path: string, params?: object) {
     return this.request(path, { method: 'delete', params })
   }
 }
 
 export default Http
 
-export const http = new Http(import.meta.env.VITE_BASE_API_URL)
+export const http = Http.getInstance(import.meta.env.VITE_BASE_API_URL)

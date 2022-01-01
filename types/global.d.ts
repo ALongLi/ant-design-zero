@@ -15,8 +15,8 @@ type LayoutType = 'HSC' | 'SHC'
 
 interface ApiResult<TData> {
   code: number
-  data?: TData
-  message?: string
+  data: TData | undefined
+  message: string | undefined
 }
 
 interface AuthData {
