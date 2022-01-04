@@ -2,18 +2,20 @@ import useAsync from './useAsync'
 import { RequestError } from '@/utils/http'
 
 const useApi = <D>() => {
-  const { loading, data, run } = useAsync<D>()
+  const { loading, data, run, error } = useAsync<D>()
 
-  const api = async (api: Api, config: ApiConfig): Promise<D | Error | undefined> => {
-    const result = await run(api.http.request(api.url, { method: api.method, ...config }))
-    if (result instanceof Error) {
-      if ((result as RequestError).handled) {
+  const api = async (api: Api, config: ApiConfig) => {
+    console.log(1, error)
+    await run(api.http.request(api.url, { method: api.method, ...config }))
+    if (error instanceof Error) {
+      console.log(2, error)
+      if ((error as RequestError).handled) {
+        console.log(3, error)
         return new Promise(() => null)
       } else {
-        throw result as Error
+        throw error
       }
     }
-    return result
   }
 
   return {
