@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
 import { Button, message } from 'antd'
-import useHttp from '@/hooks/useHttp'
+import { useApi } from '@/hooks'
+import { ERR1 } from '@/api'
 
 export default () => {
-  const { loading, get } = useHttp()
+  const { api, data, loading } = useApi()
   const handleErr1 = async () => {
     // http.get('err1')
-    const data = await get('err1')
-    console.log(data)
+    await api(ERR1, {})
+    console.log('err1:', data)
   }
   useEffect(() => {
     if (loading) {

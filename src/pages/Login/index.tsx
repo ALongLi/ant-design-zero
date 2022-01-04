@@ -2,7 +2,7 @@ import { ProFormText, LoginForm } from '@ant-design/pro-form'
 import { LockOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons'
 import Footer from '@/layout/components/Footer'
 import { useAuth } from '@/context/auth'
-import styles from './.module.less'
+import styles from './index.module.less'
 
 const mockWait = (time = 100) => {
   return new Promise((resolve) => {

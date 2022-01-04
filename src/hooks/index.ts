@@ -1,3 +1,5 @@
 import useMount from './useMount'
+import useAsync from './useAsync'
+import useApi from './useApi'
 
-export { useMount }
+export { useMount, useAsync, useApi }

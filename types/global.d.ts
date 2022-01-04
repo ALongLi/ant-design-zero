@@ -13,12 +13,6 @@ interface MenuItem {
  */
 type LayoutType = 'HSC' | 'SHC'
 
-interface ApiResult<TData> {
-  code: number
-  data: TData | undefined
-  message: string | undefined
-}
-
 interface AuthData {
   accessToken: string
   expiresAt: number
