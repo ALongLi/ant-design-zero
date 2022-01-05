@@ -15,16 +15,16 @@ interface IHttp {
   delete: <D>(path: string, params?: object) => Promise<D | undefined>
 }
 
-type ApiConfig = Omit<RequestConfig, 'method'>
-
-interface Api {
-  http: IHttp
-  url: string
-  method: HttpMethod
-}
-
 interface ApiResult<D> {
   code: number
   data: D | undefined
   message: string | undefined
 }
+
+interface AsyncState<D> {
+  loading: boolean
+  data?: D
+  error?: Error
+}
+
+type AsyncResult<D> = Omit<AsyncState<D>, 'loading'>

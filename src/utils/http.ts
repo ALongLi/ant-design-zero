@@ -35,22 +35,23 @@ class Http implements IHttp {
   }
 
   private static container: Record<string, Http> = {}
+
   static getInstance(baseUrl: string): Http {
-    if (this.container[baseUrl]) {
-      return this.container[baseUrl]
+    if (!this.container[baseUrl]) {
+      this.container[baseUrl] = new Http(baseUrl)
     }
-    return new Http(baseUrl)
+    return this.container[baseUrl]
   }
 
-  request<D>(path: string, config: RequestConfig = {}): Promise<D | undefined> {
-    let url = /^(https?:)|\//.test(path) ? path : `${this.baseUrl}/${path}`
+  request<D>(url: string, config: RequestConfig = {}): Promise<D | undefined> {
+    let fullUrl = /^((https?:)|\/)/.test(url) ? url : `${this.baseUrl}/${url}`
     if (config.params && Object.keys(config.params).length > 0) {
-      url += '?' + queryString(config.params)
+      fullUrl += '?' + queryString(config.params)
     }
-
     const { accessToken } = getAuthData() || {}
 
-    return fetch(url, {
+    return fetch(fullUrl, {
+      method: 'get',
       headers: {
         'Content-Type': 'application/json',
         Authorization: accessToken ? `Bearer ${accessToken}` : '',
@@ -76,27 +77,27 @@ class Http implements IHttp {
       })
   }
 
-  get<D>(path: string, params?: object) {
-    return this.request<D>(path, { method: 'get', params })
+  get<D>(url: string, params?: object) {
+    return this.request<D>(url, { method: 'get', params })
   }
 
-  post<D>(path: string, data: object) {
-    return this.request<D>(path, { method: 'post', data })
+  post<D>(url: string, data: object) {
+    return this.request<D>(url, { method: 'post', data })
   }
 
-  put<D>(path: string, data: object) {
-    return this.request<D>(path, { method: 'put', data })
+  put<D>(url: string, data: object) {
+    return this.request<D>(url, { method: 'put', data })
   }
 
-  patch<D>(path: string, data: object) {
-    return this.request<D>(path, { method: 'patch', data })
+  patch<D>(url: string, data: object) {
+    return this.request<D>(url, { method: 'patch', data })
   }
 
-  delete<D>(path: string, params?: object) {
-    return this.request<D>(path, { method: 'delete', params })
+  delete<D>(url: string, params?: object) {
+    return this.request<D>(url, { method: 'delete', params })
   }
 }
 
 export default Http
 
-export const http = Http.getInstance(import.meta.env.VITE_BASE_API_URL)
+export const getInstance = (baseUrl: string) => Http.getInstance(baseUrl)

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 export default function useSyncState<S>(initialValue: S) {
-  const [value, updateValue] = useState(initialValue)
+  const [value, setValue] = useState(initialValue)
 
   let current = value
 
@@ -9,7 +9,7 @@ export default function useSyncState<S>(initialValue: S) {
 
   const set = (newValue: S) => {
     current = newValue
-    updateValue(newValue)
+    setValue(newValue)
     return current
   }
 

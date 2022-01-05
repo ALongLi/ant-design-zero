@@ -53,6 +53,19 @@ export default [
     },
   },
   {
+    url: '/api/users/1',
+    method: 'get',
+    response: {
+      code: 0,
+      data: {
+        id: 1,
+        name: 'Admin',
+        roles: ['admin'],
+        avatar: '',
+      },
+    },
+  },
+  {
     url: '/api/err1',
     method: 'get',
     response: {
