@@ -1,22 +1,33 @@
-:global {
-  @media (min-width: 768px) {
-    .ant-pro-form-login-container {
-      padding: 0 0 100px;
-      justify-content: center;
-    }
-  }
-}
-
 .login {
   display: flex;
   flex-direction: column;
+  align-content: center;
   height: 100vh;
   overflow: auto;
+}
+
+.loginForm {
+  background: #fff;
+  max-width: 450px;
+  border-radius: 5px;
+  padding: 0 30px 10px;
+  margin: 120px auto 20px;
+  box-shadow: rgb(0 0 0 / 5%) 0px 0px 5px;
+}
+
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   background: #f0f2f5;
-  background-image: url('/assets/login-bg.svg');
-  background-repeat: no-repeat;
-  background-position: center 110px;
-  background-size: 100%;
+  background-image: url('/assets/login-bg.svg'),
+    url(https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.291/static/media/default_left.e74de3ec.svg),
+    url(https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.291/static/media/default_right.6ece9751.svg);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed;
+  background-size: 90%, 368px, 368px;
+  background-position: center 10px, left bottom, right bottom;
 }
 
 .openicon {
@@ -25,4 +36,16 @@
   font-size: 24px;
   vertical-align: middle;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .bg {
+    background-size: 100%, 150px, 150px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .loginForm {
+    margin-top: 50px;
+  }
 }
