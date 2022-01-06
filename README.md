@@ -4,6 +4,8 @@
 
 A starting point for new web applications with React, Typescript, Vite and Ant Design.
 
+![](https://user-images.githubusercontent.com/5000396/148322791-858b85c6-f9db-49cd-83a1-54415b688465.png)
+
 </div>
 
 ## Features
