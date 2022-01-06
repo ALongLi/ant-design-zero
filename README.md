@@ -8,15 +8,15 @@ A starting point for new web applications with React, Typescript, Vite and Ant D
 
 ## Features
 
-- [x] :rocket: **State of The Art Development**: Newest development stack of React/vite/antd
+- [x] :rocket: **State of The Art Development**: Newest development stack of React/Vite/AntDesign
 - [x] :bulb: **TypeScript**: A language for application-scale JavaScript
 - [x] :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
 - [x] :gear: **Best Practices**: Solid workflow to make your code healthy
+- [x] :1234: **Mock development**: Easy to use mock development solution
 - [ ] :scroll: **Blocks**: Build page with block template
 - [ ] :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
 - [ ] :art: **Theming**: Customizable theme with simple config
 - [ ] :globe_with_meridians: **International**: Built-in i18n solution
-- [ ] :1234: **Mock development**: Easy to use mock development solution
 - [ ] :white_check_mark: **UI Test**: Fly safely with unit and e2e tests
 
 ## Browsers support
